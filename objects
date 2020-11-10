@@ -1,0 +1,107 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Nov 10 16:03:27 2020
+
+@author: taisb
+"""
+
+######## OBJECTS
+import random
+
+suits = ["Hearts", "Diamonds", "Spades", "Clubs"]
+ranks = ["Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen",\
+         "King", "Ace"]
+    
+class Card:
+    def __init__(self, suit, rank):
+        self.suit = suit
+        self.rank = rank
+        
+    def __str__(self):
+        return self.rank + " of " + self.suit
+        
+
+class Deck:
+    def __init__(self):
+        self.full_deck = []
+        for suit in suits:
+            for rank in ranks:
+                self.full_deck.append(Card(suit, rank))
+        
+    def shuffle(self):
+        random.shuffle(self.full_deck)
+        
+    def deal(self):
+        return self.full_deck.pop()
+    
+    
+class Player:
+     def __init__(self):
+         self.hand = []
+         
+     def add_card(self, card):
+         self.hand.append(card)
+         
+     def show(self):
+        print("YOUR HAND:\n")
+        for card in self.hand:
+            print(card, "\n")
+       
+            
+class Computer:
+     def __init__(self):
+         self.hand = []
+         
+     def add_card(self, card):
+         self.hand.append(card)
+         
+     def show(self):
+        print("COMPUTER'S HAND':\n")
+        for card in self.hand:
+            print(card, "\n")
+    
+    
+class Table:
+    def __init__(self):
+        self.table = []
+        
+    def add_card(self, card):
+        self.table.append(card)
+    
+    def show_three(self):
+        print("TABLE'S CARDS':\n")
+        for i in range(0, 3):
+            print(self.table[i], "\n")
+        print("---")
+        print("---")
+        
+    def show_one(self):
+        print("TABLE'S CARDS:\n")
+        for i in range(0, 4):
+            print(self.table[i], "\n")
+        print("---")
+    
+    def show_two(self):
+        print("TABLE'S CARDS:\n")
+        for card in self.table:
+            print(card, "\n")
+        
+        
+class Chips:
+    def __init__(self):
+        self.initial = int(input("With how many chips would you like to start? "))
+        self.total = self.initial
+        
+    def win_bet(self, pot):
+        self.total += pot
+        
+    def lose_bet(self, bet):
+        self.total -= bet
+        
+        
+class Pot:
+    def __init__(self):
+        self.total = 0
+        
+    def add_pot(self, bet):
+        self.total += bet
